@@ -919,13 +919,14 @@ export class Terminal extends CoreTerminal implements ITerminal {
     return this.buffer.markers;
   }
 
-  public addMarker(cursorYOffset: number): IMarker | undefined {
+  public addMarker(cursorYOffset: number, cursorXOffset: number): IMarker | undefined {
     // Disallow markers on the alt buffer
     if (this.buffer !== this.buffers.normal) {
       return;
     }
 
-    return this.buffer.addMarker(this.buffer.ybase + this.buffer.y + cursorYOffset);
+    // CQ: what does ybase do? Do we need an xbase
+    return this.buffer.addMarker(this.buffer.ybase + this.buffer.y + cursorYOffset, this.buffer.x + cursorXOffset);
   }
 
   /**

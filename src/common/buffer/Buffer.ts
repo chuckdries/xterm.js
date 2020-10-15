@@ -579,8 +579,8 @@ export class Buffer implements IBuffer {
     return x >= this._cols ? this._cols - 1 : x < 0 ? 0 : x;
   }
 
-  public addMarker(y: number): Marker {
-    const marker = new Marker(y);
+  public addMarker(y: number, x: number): Marker {
+    const marker = new Marker(y, x);
     this.markers.push(marker);
     marker.register(this.lines.onTrim(amount => {
       marker.line -= amount;

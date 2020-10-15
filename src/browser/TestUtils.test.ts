@@ -198,7 +198,7 @@ export class MockTerminal implements ITerminal {
 
 export class MockBuffer implements IBuffer {
   public markers!: IMarker[];
-  public addMarker(y: number): IMarker {
+  public addMarker(y: number, x: number): IMarker {
     throw new Error('Method not implemented.');
   }
   public isCursorInViewport!: boolean;

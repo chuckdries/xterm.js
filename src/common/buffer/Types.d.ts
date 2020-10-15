@@ -44,7 +44,7 @@ export interface IBuffer {
   iterator(trimRight: boolean, startIndex?: number, endIndex?: number, startOverscan?: number, endOverscan?: number): IBufferStringIterator;
   getNullCell(attr?: IAttributeData): ICellData;
   getWhitespaceCell(attr?: IAttributeData): ICellData;
-  addMarker(y: number): IMarker;
+  addMarker(y: number, x: number): IMarker;
 }
 
 export interface IBufferSet extends IDisposable {

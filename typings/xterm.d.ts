@@ -395,6 +395,9 @@ declare module 'xterm' {
      * a line from the buffer.
      */
     onDispose: IEvent<void>;
+
+    // CQ
+    readonly column: number;
   }
 
   /**

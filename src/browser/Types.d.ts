@@ -61,7 +61,7 @@ export interface IPublicTerminal extends IDisposable {
   registerLinkProvider(linkProvider: ILinkProvider): IDisposable;
   registerCharacterJoiner(handler: (text: string) => [number, number][]): number;
   deregisterCharacterJoiner(joinerId: number): void;
-  addMarker(cursorYOffset: number): IMarker | undefined;
+  addMarker(cursorYOffset: number, cursorXOffset: number): IMarker | undefined;
   hasSelection(): boolean;
   getSelection(): string;
   getSelectionPosition(): ISelectionPosition | undefined;

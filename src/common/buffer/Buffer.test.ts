@@ -420,9 +420,9 @@ describe('Buffer', () => {
         // abcdefghij
         // 0123456789
         // abcdefghij
-        const firstMarker = buffer.addMarker(0);
-        const secondMarker = buffer.addMarker(1);
-        const thirdMarker = buffer.addMarker(2);
+        const firstMarker = buffer.addMarker(0, 0);
+        const secondMarker = buffer.addMarker(1, 0);
+        const thirdMarker = buffer.addMarker(2, 0);
         assert.equal(buffer.lines.get(0)!.translateToString(), 'abcdefghij');
         assert.equal(buffer.lines.get(1)!.translateToString(), '0123456789');
         assert.equal(buffer.lines.get(2)!.translateToString(), 'klmnopqrst');
@@ -445,6 +445,8 @@ describe('Buffer', () => {
         assert.equal(buffer.lines.get(12)!.translateToString(), 'op');
         assert.equal(buffer.lines.get(13)!.translateToString(), 'qr');
         assert.equal(buffer.lines.get(14)!.translateToString(), 'st');
+        // CQ: wrapping behavior?
+        // CQ: add tests
         assert.equal(firstMarker.line, 0, 'first marker should remain unchanged');
         assert.equal(secondMarker.line, 5, 'second marker should be shifted since the first line wrapped');
         assert.equal(thirdMarker.line, 10, 'third marker should be shifted since the first and second lines wrapped');
@@ -483,9 +485,9 @@ describe('Buffer', () => {
         // abcdefghij
         // 0123456789
         // abcdefghij
-        const firstMarker = buffer.addMarker(0);
-        const secondMarker = buffer.addMarker(1);
-        const thirdMarker = buffer.addMarker(2);
+        const firstMarker = buffer.addMarker(0, 0);
+        const secondMarker = buffer.addMarker(1, 0);
+        const thirdMarker = buffer.addMarker(2, 0);
         buffer.y = 3;
         assert.equal(buffer.lines.get(0)!.translateToString(), 'abcdefghij');
         assert.equal(buffer.lines.get(1)!.translateToString(), '0123456789');
@@ -1069,7 +1071,7 @@ describe('Buffer', () => {
     it('should adjust a marker line when the buffer is trimmed', () => {
       buffer = new Buffer(true, new MockOptionsService({ scrollback: 0 }), bufferService);
       buffer.fillViewportRows();
-      const marker = buffer.addMarker(buffer.lines.length - 1);
+      const marker = buffer.addMarker(buffer.lines.length - 1, 0);
       assert.equal(marker.line, buffer.lines.length - 1);
       buffer.lines.onTrimEmitter.fire(1);
       assert.equal(marker.line, buffer.lines.length - 2);
@@ -1078,7 +1080,7 @@ describe('Buffer', () => {
       buffer = new Buffer(true, new MockOptionsService({ scrollback: 0 }), bufferService);
       buffer.fillViewportRows();
       assert.equal(buffer.markers.length, 0);
-      const marker = buffer.addMarker(0);
+      const marker = buffer.addMarker(0, 0);
       assert.equal(marker.isDisposed, false);
       assert.equal(buffer.markers.length, 1);
       buffer.lines.onTrimEmitter.fire(1);
