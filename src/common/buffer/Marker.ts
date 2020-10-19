@@ -32,7 +32,7 @@ export class Marker extends Disposable implements IMarker {
     this.isDisposed = true;
     this.line = -1;
     this.column = -1;
-    // Emit before super.dispose such that dispose listeners get a change to react
+    // Emit before super.dispose such that dispose listeners get a chance to react
     this._onDispose.fire();
     super.dispose();
   }
