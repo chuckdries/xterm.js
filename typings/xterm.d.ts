@@ -396,7 +396,12 @@ declare module 'xterm' {
      */
     onDispose: IEvent<void>;
 
-    // CQ
+    /**
+     * The actual column index in the buffer at this point in time. This is set to
+     * -1 if the marker has been disposed.
+     * Keep in mind that if your terminal is resized after the mark is placed,
+     * the buffer line may be shorter than the column the mark was placed at
+     */
     readonly column: number;
   }
 
